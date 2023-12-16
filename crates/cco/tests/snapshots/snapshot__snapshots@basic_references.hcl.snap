@@ -1,0 +1,13 @@
+---
+source: crates/cco/tests/snapshot.rs
+expression: rendered
+input_file: crates/cco/tests/basic_references.hcl
+---
+value: test value
+ref_to_own_value: test value
+ref_to_others_value: example value
+attribute_with_object_value:
+  value: object value
+  abs_ref: test value
+ref_into_object: object value
+

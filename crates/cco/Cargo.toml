@@ -1,0 +1,30 @@
+[package]
+name = "cco"
+version = "0.1.0"
+authors = ["Dennis Frenken <dev@frenken.email>"]
+edition = "2021"
+description = "cascading configuration"
+readme = "../../README.md"
+license = "MIT"
+homepage = "https://github.com/denfren/cco"
+repository = "https://github.com/denfren/cco"
+keywords = ["hcl", "configuration"]
+categories = ["command-line-utilities"]
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+derive-new = "0.6"
+hcl-edit = "0.7"
+hcl-rs = "0.16"
+indexmap = "2"
+serde = "1"
+serde_json = "1"
+serde_yaml = "0.9"
+thiserror = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[dev-dependencies]
+insta = { version = "1.34", features = ["glob", "yaml"] }
+pretty_assertions = "1"

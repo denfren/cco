@@ -1,0 +1,5 @@
+# Used to place documents for local dev
+/scratch/
+
+# rust build dir
+target/

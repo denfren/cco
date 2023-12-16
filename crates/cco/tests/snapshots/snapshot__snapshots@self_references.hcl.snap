@@ -1,0 +1,9 @@
+---
+source: crates/cco/tests/snapshot.rs
+expression: rendered
+input_file: crates/cco/tests/self_references.hcl
+---
+self_label_ref: test
+value: 1
+self_ref: 1
+
