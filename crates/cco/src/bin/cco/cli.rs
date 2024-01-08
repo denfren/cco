@@ -57,13 +57,20 @@ pub struct InputArgs {
     /// Load files from given directory
     #[clap(short = 'd', long = "input-dir")]
     pub directories: Vec<PathBuf>,
+
+    /// Load files from work directory and up
+    ///
+    /// Load each directory walking up the tree.
+    /// Stops when it no longer matches any files.
+    /// Empty files are permitted.
+    #[clap(short = 'c', long = "input-chain", conflicts_with("workdir"))]
+    pub chain: bool,
 }
 
 #[derive(Parser, Debug)]
 pub struct OutputArgs {
     #[arg(short = 'F', long = "output-format", default_value_t)]
     pub format: OutputFormat,
-
     // #[clap(short = 'O', long = "output-file")]
     // pub output_file: Option<PathBuf>,
 }

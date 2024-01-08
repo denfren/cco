@@ -1,5 +1,6 @@
 mod cli;
 
+use cco::hcl_documents::LoadError;
 use cco::value::Value;
 
 fn main() {
@@ -56,7 +57,7 @@ pub fn evaluate(cli: cli::EvaluateCommand) -> anyhow::Result<()> {
 }
 
 fn load(input: &cli::InputArgs) -> anyhow::Result<cco::hcl_documents::HclDocuments> {
-    if !input.workdir && input.files.is_empty() && input.directories.is_empty() {
+    if !input.chain && input.files.is_empty() && input.directories.is_empty() {
         let stdin = std::io::read_to_string(std::io::stdin())?;
         let body = hcl_edit::parser::parse_body(&stdin)?;
         return Ok(body.into());
@@ -66,6 +67,23 @@ fn load(input: &cli::InputArgs) -> anyhow::Result<cco::hcl_documents::HclDocumen
 
     if input.workdir {
         documents.load_directory(&std::env::current_dir()?)?;
+    }
+
+    if input.chain {
+        let mut current_dir = std::env::current_dir()?;
+        loop {
+            match documents.load_directory(&current_dir) {
+                Ok(_) => {
+                    let Some(parent) = current_dir.parent() else {
+                        break;
+                    };
+
+                    current_dir = parent.to_owned();
+                }
+                Err(LoadError::NoFilesFound) => break,
+                Err(e) => Err(e)?,
+            }
+        }
     }
 
     for file_path in &input.files {

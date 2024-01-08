@@ -194,6 +194,8 @@ If there is a single file it should be named `cco.hcl`. When using multiple file
 should be `.cco.hcl`. \
 `cco` will load any file provided via the `-f/--input-file` option but only load files with names ending in `cco.hcl`
 when loading from the working directory (`-w/--input-workdir`) or directories provided via `-d/--input-dir`.
+There is an additional mode "chain" that starts at the current work directory and then walks up the tree as long as it finds files to load `-c/--input-chain`.
+
 When no options for files or directories are provided `cco` will read `stdin` as a single file.
 
 **Output**
