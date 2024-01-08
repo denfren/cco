@@ -180,7 +180,7 @@ data example foo bar {
 
 **Additionally:**
 
-- the load order of multiple files will never affect the value output \
+- the load order of multiple files will never affect the value output
 - the order of root blocks will never affect the value output
 - currently, not all rules are enforced
 - currently, there are no functions
